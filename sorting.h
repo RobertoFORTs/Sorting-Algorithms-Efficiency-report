@@ -7,7 +7,7 @@
 //funções principais
 void selectionSort();
 
-void insertionSort();
+void insertionSort(int n, float *vetor);
 
 void mergeSort();
 
