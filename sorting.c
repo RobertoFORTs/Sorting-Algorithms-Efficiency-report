@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sorting.h"
-#define MAX 20000
 
 //funções auxiliares
-void intercala(int p, int q, int r, int v[MAX]){
-  int i, j, k, w[MAX];
+void intercala(int p, int q, int r, int *v){
+  int i, j, k, *w;
 
   i = p; j = q; k = 0; 
   while(i < q && j < r) {
@@ -46,8 +45,14 @@ void insertionSort(int n, float *vetor){
     }
 }
 
-void mergeSort(){
-
+void mergeSort(int p, int r, int *v){
+  int q;
+  if(p < r - 1){
+    q = (p + r) / 2;
+    mergesort(p, q, v);
+    mergesort(q, r, v);
+    intercala(p, q, r, v);
+  }
 }
 
 void heapSort(){
