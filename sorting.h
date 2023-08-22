@@ -9,7 +9,7 @@ void selectionSort();
 
 void insertionSort(int n, float *vetor);
 
-void mergeSort();
+void mergeSort(int p, int r, int *v);
 
 void heapSort();
 
