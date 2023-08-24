@@ -34,6 +34,24 @@ void troca(int *a, int *b) {
   b = aux;
 }
 
+
+int divide(int *vetorA, int p, int r) {
+  int x;
+  x = vetorA[r];
+  int i;
+  i = p - 1;
+  for (int j = p; p < r - 1; p++) {
+    if (vetorA[j] <= x) {
+      i++;
+      troca(&vetorA[i], &vetorA[j]);
+    }
+  }
+  troca(&vetorA[i + 1], &vetorA[r]);
+
+  return i + 1;
+}
+
+
 //funções principais
 void selectionSort(int *vetor, int n) {
   int i;
@@ -74,8 +92,14 @@ void heapSort(){
 
 }
 
-void quickSort(){
-
+// algoritimo baseado no livro de Cormen //
+void quickSort(int *vetorA, int p, int r) {
+  int q;
+  if (p < r) {
+    q = divide(vetorA, p, r);
+    quickSort(vetorA, p, q - 1);
+    quickSort(vetorA, q + 1, r);
+  }
 }
 
 void countingSort(){
