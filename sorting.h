@@ -2,10 +2,11 @@
 #include <stdlib.h>
 
 //funções auxiliares
+void troca(int *a, int *b);
 
 
 //funções principais
-void selectionSort();
+void selectionSort(int *vetor, int n);
 
 void insertionSort(int n, float *vetor);
 

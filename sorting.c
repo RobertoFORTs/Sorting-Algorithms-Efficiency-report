@@ -27,9 +27,24 @@ void intercala(int p, int q, int r, int *v){
   }
 }
 
-//funções principais
-void selectionSort(){
 
+void troca(int *a, int *b) {
+  int *aux = a;
+  a = b;
+  b = aux;
+}
+
+//funções principais
+void selectionSort(int *vetor, int n) {
+  int i;
+  for (i = 0; i < n - 1; i++) {
+    int menorIndice = i;
+    for (int j = i; j < n; j++) {
+      if (vetor[j] < vetor[menorIndice])
+        menorIndice = j;
+    }
+    troca(&vetor[menorIndice], &vetor[i]);
+  }
 }
 
 void insertionSort(int n, float *vetor){
