@@ -49,8 +49,8 @@ void mergeSort(int p, int r, int *v){
   int q;
   if(p < r - 1){
     q = (p + r) / 2;
-    mergesort(p, q, v);
-    mergesort(q, r, v);
+    mergeSort(p, q, v);
+    mergeSort(q, r, v);
     intercala(p, q, r, v);
   }
 }
