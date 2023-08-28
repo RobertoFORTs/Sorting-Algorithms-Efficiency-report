@@ -13,30 +13,46 @@ int main(){
     scanf("%d %d %d %d", &inc, &fim, &stp, &rpt);
     int i = 0;
     int j = 0;
+    int aux;
     int quantidadeDeN = (fim - inc)/stp;
-
-    //---------------------------------------------------------
-    //Construção dos vetores para os diversos casos de testes
-
-    
-
-
+    int n = inc;
+    srand(time(NULL));
+    float somaMerge;
 
     //---------------------------------------------------------
     //Primeiro Caso (execução dos processos repetidas vezes)
     printf("Primeiro caso, Vetor preenchido aleatóriamente:\n");
-
-    while (i < quantidadeDeN){
+    printf("            Mergesort");
+    while (i <= quantidadeDeN && n <= fim){
         
         j = 0; //controla a quantidade de repetições para cada caso de teste
-
-        while (j < rpt){
-
-            //obter soma dos tempos de execução para cada algorítimo
+        
+        int *v = malloc(n* sizeof(int)); // alocando vetor de tamanho n 
+        
+        for (aux = 0; aux < n; aux++){ //preencher vetor
+            int x = rand();
+            if (x >= 0)
+                v[aux] = x;
             
+        }
+
+        while (j < rpt){ //realizar operações com vetor atual
+            
+            clock_t mergeBegin = clock();
+            insertionSort(n, v);
+            clock_t mergeEnd = clock();
+            
+            //obter soma dos tempos de execução para cada algorítimo
+            somaMerge = somaMerge + ((float)mergeEnd - (float)mergeBegin) / 1000000.0F;
+
             j++;
         }
         //calcular media para cada n e exibir
+        float mediaMerge = somaMerge/rpt;
+        
+        printf("\nn:%d        %f\n", n, mediaMerge);
+        free(v); //liberando vetor
+        n = n + stp;
         i++;
     }
     

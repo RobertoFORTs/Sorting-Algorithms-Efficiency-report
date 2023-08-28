@@ -10,7 +10,7 @@ int divide(int *vetorA, int p, int r);
 //funções principais
 void selectionSort(int *vetor, int n);
 
-void insertionSort(int n, float *vetor);
+void insertionSort(int n, int *vetor);
 
 void mergeSort(int p, int r, int *v);
 

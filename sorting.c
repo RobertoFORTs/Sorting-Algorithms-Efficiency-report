@@ -65,7 +65,7 @@ void selectionSort(int *vetor, int n) {
   }
 }
 
-void insertionSort(int n, float *vetor){
+void insertionSort(int n, int *vetor){
     int i, j;
     float valor;
 
