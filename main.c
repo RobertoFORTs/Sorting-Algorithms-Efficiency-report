@@ -18,6 +18,7 @@ int main(){
     int n = inc;
     srand(time(NULL));
     float somaInsertion, somaSelection, somaMerge, somaQuick, somaHeap, somaCount;
+    float timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount;
 
     //---------------------------------------------------------
     //Primeiro Caso (execução dos processos repetidas vezes)
@@ -45,9 +46,9 @@ int main(){
             selectionSort(v, n);
             clock_t selectionEnd = clock();
             
-            // clock_t mergeBegin = clock();
-            // mergeSort(0, n, v);
-            // clock_t mergeEnd = clock();
+            clock_t mergeBegin = clock();
+            mergeSort(0, n, v);
+            clock_t mergeEnd = clock();
 
             clock_t quickBegin = clock();
             quickSort(v, 0, n);
@@ -62,12 +63,12 @@ int main(){
             // clock_t countEnd = clock();
 
             //obter soma dos tempos de execução para cada algorítimo
-            somaInsertion = somaInsertion + ((float)insertionEnd - (float)insertionBegin) / 1000000.0F;
-            somaSelection = somaSelection + ((float)selectionEnd - (float)selectionBegin) / 1000000.0F;
-            //somaMerge = somaMerge + ((float)mergeEnd - (float)mergeBegin) / 1000000.0F;
-            somaQuick = somaQuick + ((float)quickEnd - (float)quickBegin) / 1000000.0F;
-            //somaHeap = somaHeap + ((float)heapEnd - (float)heapBegin) / 1000000.0F;
-            //somaCount = somaCount + ((float)countEnd - (float)countBegin) / 1000000.0F;
+            somaInsertion = somaInsertion + ((float)insertionEnd - (float)insertionBegin) / CLOCKS_PER_SEC;
+            somaSelection = somaSelection + ((float)selectionEnd - (float)selectionBegin) / CLOCKS_PER_SEC;
+            somaMerge = somaMerge + ((float)mergeEnd - (float)mergeBegin) / CLOCKS_PER_SEC;
+            somaQuick = somaQuick + ((float)quickEnd - (float)quickBegin) / CLOCKS_PER_SEC;
+            //somaHeap = somaHeap + ((float)heapEnd - (float)heapBegin) / CLOCKS_PER_SEC;
+            //somaCount = somaCount + ((float)countEnd - (float)countBegin) / CLOCKS_PER_SEC;
 
             
 
@@ -76,12 +77,12 @@ int main(){
         //calcular media para cada n e exibir
         float mediaInsertion = somaInsertion/rpt;
         float mediaSelection = somaSelection/rpt;
-        // float mediaMerge = somaMerge/rpt;
+        float mediaMerge = somaMerge/rpt;
         float mediaQuick = somaQuick/rpt;
         // float mediaHeap = somaHeap/rpt;
         // float mediaCount = somaCount/rpt;
         
-        printf("\nn:%d        %f          %f         merge         %f\n", n, mediaInsertion, mediaSelection, mediaQuick);
+        printf("\nn:%d        %f          %f         %f         %f\n", n, mediaInsertion, mediaSelection, mediaMerge, mediaQuick);
         free(v); //liberando vetor
         n = n + stp;
         i++;
@@ -91,9 +92,56 @@ int main(){
     // Para os restante dos casos, utilizar os mesmos valores de entrada, porém com apenas uma execução para cada vetor de tamanho n
     
     i = 0;
-    printf("Segundo caso\n");
+    printf("Segundo caso: Vetor Ordenado Decrescentemente\n");
+    printf("            InsertionSort     SelectionSort     Mergesort     Quicksort     HeapSort     CountingSort     \n");
+    n = inc;
     while (i < quantidadeDeN){
+        int *v = malloc(n*sizeof(int));
+        for (aux = 0; aux < n; aux++){ //preencher vetor
+            int x = rand();
+            if (x >= 0)
+                v[aux] = x;
+        }
+        
+        mergeSort(0, n, v);
+        
+        for (aux = 0; aux < n; aux++){
+            troca(&v[aux], &v[n-1-aux]);
+        }
+        
 
+        clock_t insertionBegin = clock();
+        insertionSort(n, v);
+        clock_t insertionEnd = clock();
+        timeInsertion = (insertionEnd - insertionBegin)/CLOCKS_PER_SEC;
+
+        clock_t selectionBegin = clock();
+        selectionSort(v, n);
+        clock_t selectionEnd = clock();
+        timeSelection = (selectionEnd - selectionBegin)/CLOCKS_PER_SEC;
+        
+        clock_t mergeBegin = clock();
+        mergeSort(0, n, v);
+        clock_t mergeEnd = clock();
+        timeMerge = (mergeEnd - mergeBegin)/CLOCKS_PER_SEC;
+
+        clock_t quickBegin = clock();
+        quickSort(v, 0, n);
+        clock_t quickEnd = clock();
+        timeQuick = (quickEnd - quickBegin)/CLOCKS_PER_SEC;
+
+        // clock_t heapBegin = clock();
+        // heapSort();
+        // clock_t heapEnd = clock();
+        
+        // clock_t countBegin = clock();
+        // countingSort();
+        // clock_t countEnd = clock();
+
+        printf("\nn:%d        %f          %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick);
+
+        free(v);
+        n = n + stp;
         i++;
     }
 

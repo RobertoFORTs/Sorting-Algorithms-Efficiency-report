@@ -5,7 +5,7 @@
 //funções auxiliares
 void intercala(int p, int q, int r, int *v){
   int i, j, k, *w;
-
+  w = malloc(r*sizeof(int));
   i = p; j = q; k = 0; 
   while(i < q && j < r) {
     if(v[i] < v[j]){
@@ -25,13 +25,14 @@ void intercala(int p, int q, int r, int *v){
   for(i = p; i < r; i++) {
     v[i] = w[i - p];
   }
+  free(w);
 }
 
 
 void troca(int *a, int *b) {
   int *aux = a;
-  *a = *b;
-  *b = *aux;
+  a = b;
+  b = aux;
 }
 
 
@@ -94,8 +95,8 @@ void heapSort(){
 
 // algoritimo baseado no livro de Cormen //
 void quickSort(int *vetorA, int p, int r) {
-  int q;
   if (p < r) {
+    int q;
     q = divide(vetorA, p, r);
     quickSort(vetorA, p, q - 1);
     quickSort(vetorA, q + 1, r);
