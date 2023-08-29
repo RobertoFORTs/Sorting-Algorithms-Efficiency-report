@@ -139,6 +139,33 @@ void quickSort(int *vetorA, int p, int r) {
   }
 }
 
-void countingSort(){
-    
+void countingSort(int arr[], int size, int range) {
+  int output[size];
+  int count[range + 1];
+
+  // Inicializa o array de contagem com zeros
+  for (int i = 0; i <= range; i++) {
+    count[i] = 0;
+  }
+
+  // Conta a frequência de cada elemento
+  for (int i = 0; i < size; i++) {
+    count[arr[i]]++;
+  }
+
+  // Atualiza o array de contagem para conter posições finais dos elementos
+  for (int i = 1; i <= range; i++) {
+    count[i] += count[i - 1];
+  }
+
+  // Constrói o array de saída
+  for (int i = size - 1; i >= 0; i--) {
+    output[count[arr[i]] - 1] = arr[i];
+    count[arr[i]]--;
+  }
+
+  // Copia o array ordenado de volta para o array original
+  for (int i = 0; i < size; i++) {
+    arr[i] = output[i];
+  }
 }

@@ -26,4 +26,4 @@ void heapSort(int n, int *vetor);
 
 void quickSort(int *vetorA, int p, int r);
 
-void countingSort();
+void countingSort(int arr[], int size, int range);
