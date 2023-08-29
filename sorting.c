@@ -52,6 +52,34 @@ int divide(int *vetorA, int p, int r) {
   return i + 1;
 }
 
+int esquerdo(int i) { return 2 * (i + 1) - 1; }
+
+int direito(int i) { return 2 * (i + 1); }
+
+void desce(int n, int *vetor, int i) {
+  int e, d, maior;
+
+  e = esquerdo(i);
+  d = direito(i);
+  if (e < n && vetor[e] > vetor[i])
+    maior = e;
+  else
+    maior = i;
+  if (d < n && vetor[d] > vetor[maior])
+    maior = d;
+  if (maior != i) {
+    troca(&vetor[i], &vetor[maior]);
+    desce(n, vetor, maior);
+  }
+}
+
+void constroi_max_heap(int n, int *vetor) {
+  int i;
+
+  for (i = n / 2 - 1; i >= 0; i--)
+    desce(n, vetor, i);
+}
+
 
 //funções principais
 void selectionSort(int *vetor, int n) {
@@ -89,8 +117,16 @@ void mergeSort(int p, int r, int *v){
   }
 }
 
-void heapSort(){
+// algoritmo baseado no livro de Cormen
+void heapSort(int n, int *vetor) {
+  int i;
 
+  constroi_max_heap(n, vetor);
+  for (i = n - 1; i > 0; i--) {
+    troca(&vetor[0], &vetor[i]);
+    n--;
+    desce(n, vetor, 0);
+  }
 }
 
 // algoritimo baseado no livro de Cormen //
