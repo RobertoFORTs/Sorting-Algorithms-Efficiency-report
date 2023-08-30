@@ -27,13 +27,15 @@ int main(){
     while (i <= quantidadeDeN && n <= fim){
         
         j = 0; //controla a quantidade de repetições para cada caso de teste
-        
+        aux = 0;
         int *v = (int*)calloc(n, sizeof(int)); // alocando vetor de tamanho n 
         
-        for (aux = 0; aux < n; aux++){ //preencher vetor
+        while (aux < n){ //preencher vetor
             int x = rand();
-            if (x >= 0)
+            if (x >= 0){
                 v[aux] = x;
+                aux++;
+            }
         }
         
         while (j < rpt){ //realizar operações com vetor atual
