@@ -30,16 +30,16 @@ int main(){
         aux = 0;
 
         int *v = (int*)malloc((n+1)* sizeof(int)); // alocando vetor de tamanho n 
-        
-        while (aux < n){ //preencher vetor
-            int x = rand();
-            if (x >= 0){
-                v[aux] = x;
-                aux++;
-            }
-        }
 
         while (j < rpt){ //realizar operações com vetor atual
+
+            while (aux < n){ //preencher vetor
+                int x = rand();
+                if (x >= 0){
+                    v[aux] = x;
+                    aux++;
+                }
+            }
             
             clock_t insertionBegin = clock();
             insertionSort(n, v);
