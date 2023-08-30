@@ -30,9 +30,9 @@ void intercala(int p, int q, int r, int *v){
 
 
 void troca(int *a, int *b) {
-  int *aux = a;
-  a = b;
-  b = aux;
+  int aux = *a;
+  *a = *b;
+  *b = aux;
 }
 
 
@@ -41,7 +41,7 @@ int divide(int *vetorA, int p, int r) {
   x = vetorA[r];
   int i;
   i = p - 1;
-  for (int j = p; p < r - 1; p++) {
+  for (int j = p; j < r - 1; j++) {
     if (vetorA[j] <= x) {
       i++;
       troca(&vetorA[i], &vetorA[j]);
