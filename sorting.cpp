@@ -129,7 +129,7 @@ void heapSort(int n, int *vetor) {
   }
 }
 
-// algoritimo baseado no livro de Cormen //
+// algoritmo baseado no livro de Cormen //
 void quickSort(int *vetorA, int p, int r) {
   if (p < r) {
     int q;
