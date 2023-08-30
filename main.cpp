@@ -23,12 +23,12 @@ int main(){
     //---------------------------------------------------------
     //Primeiro Caso (execução dos processos repetidas vezes)
     printf("Primeiro caso, Vetor preenchido aleatóriamente:\n");
-    printf("            InsertionSort     SelectionSort     Mergesort     Quicksort     HeapSort     CountingSort     ");
+    printf("            InsertionSort     SelectionSort       Mergesort        Quicksort     HeapSort       CountingSort\n");
     while (i <= quantidadeDeN && n <= fim){
         
         j = 0; //controla a quantidade de repetições para cada caso de teste
         
-        int *v = malloc(n* sizeof(int)); // alocando vetor de tamanho n 
+        int *v = (int*)calloc(n, sizeof(int)); // alocando vetor de tamanho n 
         
         for (aux = 0; aux < n; aux++){ //preencher vetor
             int x = rand();
@@ -54,12 +54,12 @@ int main(){
             quickSort(v, 0, n);
             clock_t quickEnd = clock();
 
-            // clock_t heapBegin = clock();
-            // heapSort();
-            // clock_t heapEnd = clock();
+            clock_t heapBegin = clock();
+            heapSort(n, v);
+            clock_t heapEnd = clock();
             
             // clock_t countBegin = clock();
-            // countingSort();
+            // countingSort(v, n, 2147483647);
             // clock_t countEnd = clock();
 
             //obter soma dos tempos de execução para cada algorítimo
@@ -67,23 +67,26 @@ int main(){
             somaSelection = somaSelection + ((float)selectionEnd - (float)selectionBegin) / CLOCKS_PER_SEC;
             somaMerge = somaMerge + ((float)mergeEnd - (float)mergeBegin) / CLOCKS_PER_SEC;
             somaQuick = somaQuick + ((float)quickEnd - (float)quickBegin) / CLOCKS_PER_SEC;
-            //somaHeap = somaHeap + ((float)heapEnd - (float)heapBegin) / CLOCKS_PER_SEC;
+            somaHeap = somaHeap + ((float)heapEnd - (float)heapBegin) / CLOCKS_PER_SEC;
             //somaCount = somaCount + ((float)countEnd - (float)countBegin) / CLOCKS_PER_SEC;
 
             
 
             j++;
         }
+        
+        free(v); //liberando vetor
+
         //calcular media para cada n e exibir
         float mediaInsertion = somaInsertion/rpt;
         float mediaSelection = somaSelection/rpt;
         float mediaMerge = somaMerge/rpt;
         float mediaQuick = somaQuick/rpt;
-        // float mediaHeap = somaHeap/rpt;
-        // float mediaCount = somaCount/rpt;
+        float mediaHeap = somaHeap/rpt;
+        //float mediaCount = somaCount/rpt;
         
-        printf("\nn:%d        %f          %f         %f         %f\n", n, mediaInsertion, mediaSelection, mediaMerge, mediaQuick);
-        free(v); //liberando vetor
+        printf("\nn:%d        %f          %f         %f         %f         %f         count\n", n, mediaInsertion, mediaSelection, mediaMerge, mediaQuick, mediaHeap);
+        
         n = n + stp;
         i++;
     }
@@ -93,10 +96,10 @@ int main(){
     
     i = 0;
     printf("Segundo caso: Vetor Ordenado Decrescentemente\n");
-    printf("            InsertionSort     SelectionSort     Mergesort     Quicksort     HeapSort     CountingSort     \n");
+    printf("               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort          CountingSort\n");
     n = inc;
-    while (i < quantidadeDeN){
-        int *v = malloc(n*sizeof(int));
+    while (i <= quantidadeDeN){
+        int *v = (int *)malloc(n*sizeof(int));
         for (aux = 0; aux < n; aux++){ //preencher vetor
             int x = rand();
             if (x >= 0)
@@ -113,32 +116,33 @@ int main(){
         clock_t insertionBegin = clock();
         insertionSort(n, v);
         clock_t insertionEnd = clock();
-        timeInsertion = (insertionEnd - insertionBegin)/CLOCKS_PER_SEC;
+        timeInsertion = ((float)insertionEnd - (float)insertionBegin)/CLOCKS_PER_SEC;
 
         clock_t selectionBegin = clock();
         selectionSort(v, n);
         clock_t selectionEnd = clock();
-        timeSelection = (selectionEnd - selectionBegin)/CLOCKS_PER_SEC;
+        timeSelection = ((float)selectionEnd - (float)selectionBegin)/CLOCKS_PER_SEC;
         
         clock_t mergeBegin = clock();
         mergeSort(0, n, v);
         clock_t mergeEnd = clock();
-        timeMerge = (mergeEnd - mergeBegin)/CLOCKS_PER_SEC;
+        timeMerge = ((float)mergeEnd - (float)mergeBegin)/CLOCKS_PER_SEC;
 
         clock_t quickBegin = clock();
         quickSort(v, 0, n);
         clock_t quickEnd = clock();
-        timeQuick = (quickEnd - quickBegin)/CLOCKS_PER_SEC;
+        timeQuick = ((float)quickEnd - (float)quickBegin)/CLOCKS_PER_SEC;
 
-        // clock_t heapBegin = clock();
-        // heapSort();
-        // clock_t heapEnd = clock();
-        
+        clock_t heapBegin = clock();
+        heapSort(n, v);
+        clock_t heapEnd = clock();
+        timeHeap = ((float)heapEnd - (float)heapBegin)/CLOCKS_PER_SEC;
+
         // clock_t countBegin = clock();
         // countingSort();
         // clock_t countEnd = clock();
 
-        printf("\nn:%d        %f          %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick);
+        printf("\nn:%d        %f          %f         %f         %f         %f         count\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap);
 
         free(v);
         n = n + stp;
@@ -148,7 +152,7 @@ int main(){
     //---------------------------------------
     i = 0;
     printf("terceiro caso\n");
-    while (i < quantidadeDeN){
+    while (i <= quantidadeDeN){
 
         i++;
     }
@@ -156,7 +160,7 @@ int main(){
     //----------------------------------------
     i = 0;
     printf("Quarto caso \n");
-    while (i < quantidadeDeN){
+    while (i <= quantidadeDeN){
 
         i++;
     }

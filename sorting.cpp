@@ -5,7 +5,7 @@
 //funções auxiliares
 void intercala(int p, int q, int r, int *v){
   int i, j, k, *w;
-  w = malloc(r*sizeof(int));
+  w = (int*)malloc(r*sizeof(int));
   i = p; j = q; k = 0; 
   while(i < q && j < r) {
     if(v[i] < v[j]){
