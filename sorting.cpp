@@ -81,6 +81,16 @@ void constroi_max_heap(int n, int *vetor) {
 }
 
 
+int buscaMaior(int *vetor, int n) {
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
 //funções principais
 void selectionSort(int *vetor, int n) {
   int i;
@@ -139,33 +149,37 @@ void quickSort(int *vetorA, int p, int r) {
   }
 }
 
-void countingSort(int arr[], int size, int range) {
-  int output[size];
-  int count[range + 1];
+void countingSort(int *vetor, int n) {
+    int max = buscaMaior(arr, n); // busca o maior para saber até onde criar o vetor de contagem
+    int *count = (int *)malloc((max + 1) * sizeof(int));
+    int *output = (int *)malloc(n * sizeof(int));
 
-  // Inicializa o array de contagem com zeros
-  for (int i = 0; i <= range; i++) {
-    count[i] = 0;
-  }
+    // Inicializa o array de contagem
+    for (int i = 0; i <= max; i++) {
+        count[i] = 0;
+    }
 
-  // Conta a frequência de cada elemento
-  for (int i = 0; i < size; i++) {
-    count[arr[i]]++;
-  }
+    // Conta a frequência de cada elemento
+    for (int i = 0; i < n; i++) {
+        count[arr[i]]++;
+    }
 
-  // Atualiza o array de contagem para conter posições finais dos elementos
-  for (int i = 1; i <= range; i++) {
-    count[i] += count[i - 1];
-  }
+    // Atualiza o array de contagem para conter as posições reais
+    for (int i = 1; i <= max; i++) {
+        count[i] += count[i - 1];
+    }
 
-  // Constrói o array de saída
-  for (int i = size - 1; i >= 0; i--) {
-    output[count[arr[i]] - 1] = arr[i];
-    count[arr[i]]--;
-  }
+    // Constrói o array de saída
+    for (int i = n - 1; i >= 0; i--) {
+        output[count[arr[i]] - 1] = arr[i];
+        count[arr[i]]--;
+    }
 
-  // Copia o array ordenado de volta para o array original
-  for (int i = 0; i < size; i++) {
-    arr[i] = output[i];
-  }
+    // Copia o array de saída de volta para o array original
+    for (int i = 0; i < n; i++) {
+        arr[i] = output[i];
+    }
+
+    free(count);
+    free(output);
 }

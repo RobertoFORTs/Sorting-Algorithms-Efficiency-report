@@ -14,6 +14,8 @@ int direito(int i);
 
 int esquerdo(int i);
 
+int buscaMaior(int *vetor, int n);
+
 
 //funções principais
 void selectionSort(int *vetor, int n);
@@ -26,4 +28,4 @@ void heapSort(int n, int *vetor);
 
 void quickSort(int *vetorA, int p, int r);
 
-void countingSort(int arr[], int size, int range);
+void countingSort(int *vetor, int n);
