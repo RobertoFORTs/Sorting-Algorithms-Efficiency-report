@@ -85,9 +85,9 @@ int main(){
                 w[aux] = v[aux];
             }
 
-            // clock_t countBegin = clock();
-            // countingSort(w, n, 2147483647);
-            // clock_t countEnd = clock();
+            clock_t countBegin = clock();
+            countingSort(w, n);
+            clock_t countEnd = clock();
 
             //obter soma dos tempos de execução para cada algorítimo
             
@@ -96,7 +96,7 @@ int main(){
             somaMerge = somaMerge + ((float)mergeEnd - (float)mergeBegin) / CLOCKS_PER_SEC;
             somaQuick = somaQuick + ((float)quickEnd - (float)quickBegin) / CLOCKS_PER_SEC;
             somaHeap = somaHeap + ((float)heapEnd - (float)heapBegin) / CLOCKS_PER_SEC;
-            //somaCount = somaCount + ((float)countEnd - (float)countBegin) / CLOCKS_PER_SEC;
+            somaCount = somaCount + ((float)countEnd - (float)countBegin) / CLOCKS_PER_SEC;
 
             j++;
 
@@ -109,9 +109,9 @@ int main(){
         float mediaQuick = somaQuick/rpt;
         float mediaHeap = somaHeap/rpt;
         
-        //float mediaCount = somaCount/rpt;
+        float mediaCount = somaCount/rpt;
         
-        printf("\nn:%d        %f          %f         %f         %f         %f         count\n", n, mediaInsertion, mediaSelection, mediaMerge, mediaQuick, mediaHeap);
+        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, mediaInsertion, mediaSelection, mediaMerge, mediaQuick, mediaHeap, mediaCount);
         
         n = n + stp;
         i++;
@@ -194,11 +194,12 @@ int main(){
             w[aux] = v[aux]; //cópia controle
         }
 
-        // clock_t countBegin = clock();
-        // countingSort();
-        // clock_t countEnd = clock();
+        clock_t countBegin = clock();
+        countingSort(w, n);
+        clock_t countEnd = clock();
+        timeCount = ((float)countEnd - (float)countBegin)/CLOCKS_PER_SEC;
 
-        printf("\nn:%d        %f          %f         %f         %f         %f         count\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap);
+        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
 
         free(v);
         free(w);
@@ -253,11 +254,12 @@ int main(){
         timeHeap = ((float)heapEnd - (float)heapBegin)/CLOCKS_PER_SEC;
     
 
-        // clock_t countBegin = clock();
-        // countingSort();
-        // clock_t countEnd = clock();
+        clock_t countBegin = clock();
+        countingSort(v, n);
+        clock_t countEnd = clock();
+        timeCount = ((float)countEnd - (float)countBegin)/CLOCKS_PER_SEC;
 
-        printf("\nn:%d        %f          %f         %f         %f         %f         count\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap);
+        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
 
         free(v);
         free(w);
@@ -343,11 +345,12 @@ int main(){
             w[aux] = v[aux]; //cópia controle
         }
 
-        // clock_t countBegin = clock();
-        // countingSort();
-        // clock_t countEnd = clock();
+        clock_t countBegin = clock();
+        countingSort(w, n);
+        clock_t countEnd = clock();
+        timeCount = ((float)countEnd - (float)countBegin)/CLOCKS_PER_SEC;
 
-        printf("\nn:%d        %f          %f         %f         %f         %f         count\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap);
+        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
 
         free(v);
         free(w);

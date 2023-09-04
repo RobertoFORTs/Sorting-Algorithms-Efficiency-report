@@ -82,10 +82,10 @@ void constroi_max_heap(int n, int *vetor) {
 
 
 int buscaMaior(int *vetor, int n) {
-    int max = arr[0];
+    int max = vetor[0];
     for (int i = 1; i < n; i++) {
-        if (arr[i] > max) {
-            max = arr[i];
+        if (vetor[i] > max) {
+            max = vetor[i];
         }
     }
     return max;
@@ -150,7 +150,7 @@ void quickSort(int *vetorA, int p, int r) {
 }
 
 void countingSort(int *vetor, int n) {
-    int max = buscaMaior(arr, n); // busca o maior para saber até onde criar o vetor de contagem
+    int max = buscaMaior(vetor, n); // busca o maior para saber até onde criar o vetor de contagem
     int *count = (int *)malloc((max + 1) * sizeof(int));
     int *output = (int *)malloc(n * sizeof(int));
 
@@ -161,7 +161,7 @@ void countingSort(int *vetor, int n) {
 
     // Conta a frequência de cada elemento
     for (int i = 0; i < n; i++) {
-        count[arr[i]]++;
+        count[vetor[i]]++;
     }
 
     // Atualiza o array de contagem para conter as posições reais
@@ -171,13 +171,13 @@ void countingSort(int *vetor, int n) {
 
     // Constrói o array de saída
     for (int i = n - 1; i >= 0; i--) {
-        output[count[arr[i]] - 1] = arr[i];
-        count[arr[i]]--;
+        output[count[vetor[i]] - 1] = vetor[i];
+        count[vetor[i]]--;
     }
 
     // Copia o array de saída de volta para o array original
     for (int i = 0; i < n; i++) {
-        arr[i] = output[i];
+        vetor[i] = output[i];
     }
 
     free(count);
