@@ -9,6 +9,8 @@ int main(){
     //------------------------------------------------------------
     // declaração de variáveis que serão necessárias para execução
     printf("\n");
+    FILE *arq;
+    arq = fopen("Resultados.txt", "w");
     int inc, fim, stp, rpt;
     printf("Digite o tamanho inicial, final, intervalo e número de repetições desejadas, repectivamente: \n");
     printf("\n");
@@ -25,8 +27,8 @@ int main(){
     //---------------------------------------------------------
     //Primeiro Caso (execução dos processos repetidas vezes)
     printf("\n");
-    printf("[ [RANDOM] ]\n");
-    printf("               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
+    fprintf(arq, "[ [RANDOM] ]\n");
+    fprintf(arq, "               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
     while (i <= quantidadeDeN && n <= fim){
         
         j = 0; //controla a quantidade de repetições para cada caso de teste
@@ -111,7 +113,7 @@ int main(){
         
         float mediaCount = somaCount/rpt;
         
-        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, mediaInsertion, mediaSelection, mediaMerge, mediaQuick, mediaHeap, mediaCount);
+        fprintf(arq,"\nn:%d        %f          %f         %f         %f         %f         %f\n", n, mediaInsertion, mediaSelection, mediaMerge, mediaQuick, mediaHeap, mediaCount);
         
         n = n + stp;
         i++;
@@ -123,8 +125,8 @@ int main(){
     // Para os restante dos casos, utilizar os mesmos valores de entrada, porém com apenas uma execução para cada vetor de tamanho n
     
     i = 0;
-    printf("\n\n[ [REVERSE] ]\n");
-    printf("               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
+    fprintf(arq, "\n\n[ [REVERSE] ]\n");
+    fprintf(arq, "               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
     n = inc;
     while (i <= quantidadeDeN){
         int *v = (int *)malloc((n+1)*sizeof(int));
@@ -199,7 +201,7 @@ int main(){
         clock_t countEnd = clock();
         timeCount = ((float)countEnd - (float)countBegin)/CLOCKS_PER_SEC;
 
-        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
+        fprintf(arq, "\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
 
         free(v);
         free(w);
@@ -209,8 +211,8 @@ int main(){
 
     //---------------------------------------
     i = 0;
-    printf("\n\n[ [SORTED] ]\n");
-    printf("               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
+    fprintf(arq, "\n\n[ [SORTED] ]\n");
+    fprintf(arq, "               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
     n = inc;
     while (i <= quantidadeDeN){
         int *v = (int *)malloc((n+1)*sizeof(int));
@@ -259,7 +261,7 @@ int main(){
         clock_t countEnd = clock();
         timeCount = ((float)countEnd - (float)countBegin)/CLOCKS_PER_SEC;
 
-        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
+        fprintf(arq, "\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
 
         free(v);
         free(w);
@@ -269,8 +271,8 @@ int main(){
 
     //----------------------------------------
     i = 0;
-    printf("\n\n[ [NEARLY SORTED] ]\n");
-    printf("               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
+    fprintf(arq, "\n\n[ [NEARLY SORTED] ]\n");
+    fprintf(arq, "               InsertionSort     SelectionSort    Mergesort        Quicksort        HeapSort         CountingSort\n");
     n = inc;
     while (i <= quantidadeDeN){
         int *v = (int *)calloc((n+1), sizeof(int));
@@ -350,7 +352,7 @@ int main(){
         clock_t countEnd = clock();
         timeCount = ((float)countEnd - (float)countBegin)/CLOCKS_PER_SEC;
 
-        printf("\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
+        fprintf(arq, "\nn:%d        %f          %f         %f         %f         %f         %f\n", n, timeInsertion, timeSelection, timeMerge, timeQuick, timeHeap, timeCount);
 
         free(v);
         free(w);
