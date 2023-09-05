@@ -1,3 +1,4 @@
+// Alunos: Pedro Nicoletti e Roberto Fortes
 #include <stdio.h>
 #include <stdlib.h>
 #include "sorting.h"
